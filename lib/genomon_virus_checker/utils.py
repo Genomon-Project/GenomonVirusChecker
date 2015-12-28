@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+import re
 
 def fastq2fasta(input_file, output_file):
 
@@ -50,6 +51,7 @@ def count_virus_mapped_bases(input_file, output_file):
     with open(input_file, 'r') as hin:
         for line in hin:
             F = line.rstrip('\n').split('\t')
+            F[0] = re.sub(r'\/[12]$', '', F[0])
             if F[0] != temp_read_id:
                 if temp_read_id != "":
                     for virus in temp_virus_1:
