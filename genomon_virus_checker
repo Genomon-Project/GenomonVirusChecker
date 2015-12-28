@@ -19,8 +19,8 @@ parser.add_argument("output_prefix", metavar = "output_prefix", default = None, 
 parser.add_argument("virus_reference_file", metavar = "virus_reference.fa", default = None, type = str,
                     help = "the path to virus reference file")
 
-parser.add_argument("virus_description_file", metavar = "virus_name.txt", default = None, type = str,
-                    help = "the path to virus description file")
+# parser.add_argument("virus_description_file", metavar = "virus_name.txt", default = None, type = str,
+#                     help = "the path to virus description file")
 
 
 args = parser.parse_args()
