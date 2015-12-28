@@ -1,0 +1,29 @@
+#! /usr/bin/env python
+
+from genomon_virus_checker.run import *
+import argparse
+
+parser = argparse.ArgumentParser(prog = "genomon_virus_checker")
+
+parser.add_argument("--version", action = "version", version = "genomon_virus_checker-0.1.0")
+
+parser.add_argument("fastq_file_1", metavar = "sequence1.fastq", default = None, type = str,
+                    help = "the path to the read 1 fastq file")
+
+parser.add_argument("fastq_file_2", metavar = "sequence2.fastq", default = None, type = str,
+                    help = "the path to the read 2 fastq file")
+
+parser.add_argument("output_prefix", metavar = "output_prefix", default = None, type = str, 
+                    help = "the prefix of the output")
+
+parser.add_argument("virus_reference_file", metavar = "virus_reference.fa", default = None, type = str,
+                    help = "the path to virus reference file")
+
+parser.add_argument("virus_description_file", metavar = "virus_name.txt", default = None, type = str,
+                    help = "the path to virus description file")
+
+
+args = parser.parse_args()
+
+main(args)
+
