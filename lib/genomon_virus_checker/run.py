@@ -9,6 +9,7 @@ def main(args):
     fastq_file_2 = args.fastq_file_2
     output_prefix = args.output_prefix
     virus_reference_file = args.virus_reference_file
+    min_match_thres = args.q
     # virus_description_file = args.virus_description_file
 
     output_prefix_dir = os.path.dirname(output_prefix)
@@ -43,8 +44,8 @@ def main(args):
 
 
     # psl parse
-    utils.parse_virus_from_psl(output_prefix + ".seq1.psl", output_prefix + ".seq1.virus.txt", 1, 60)
-    utils.parse_virus_from_psl(output_prefix + ".seq2.psl", output_prefix + ".seq2.virus.txt", 2, 60)
+    utils.parse_virus_from_psl(output_prefix + ".seq1.psl", output_prefix + ".seq1.virus.txt", 1, min_match_thres)
+    utils.parse_virus_from_psl(output_prefix + ".seq2.psl", output_prefix + ".seq2.virus.txt", 2, min_match_thres)
 
 
     hout = open(output_prefix + ".seq.virus.txt", 'w')
@@ -64,4 +65,5 @@ def main(args):
     fRet = subprocess.call(["rm", "-rf", output_prefix + ".seq1.virus.txt"])    
     fRet = subprocess.call(["rm", "-rf", output_prefix + ".seq2.virus.txt"])
     fRet = subprocess.call(["rm", "-rf", output_prefix + ".seq.virus.txt"])
+    fRet = subprocess.call(["rm", "-rf", output_prefix + ".seq.virus.sort.txt"])
 
