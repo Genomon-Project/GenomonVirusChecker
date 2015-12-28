@@ -15,6 +15,7 @@ def main(args):
     if output_prefix_dir != "" and not os.path.exists(output_prefix_dir):
        os.makedirs(output_prefix_dir)
 
+    """
     utils.fastq2fasta(fastq_file_1, output_prefix + ".seq1.fasta")
     utils.fastq2fasta(fastq_file_2, output_prefix + ".seq2.fasta")
 
@@ -41,4 +42,20 @@ def main(args):
         print >> sys.stderr, "blat error, error code: " + str(fRet)
         sys.exit()
 
+    """
+
+    # psl parse
+    utils.parse_virus_from_psl(output_prefix + ".seq1.psl", output_prefix + ".seq1.virus.txt", 1, 60)
+    utils.parse_virus_from_psl(output_prefix + ".seq2.psl", output_prefix + ".seq2.virus.txt", 2, 60)
+
+
+    hout = open(output_prefix + ".seq.virus.txt", 'w')
+    fRet = subprocess.call(["cat", output_prefix + ".seq1.virus.txt", output_prefix + ".seq2.virus.txt"], stdout = hout)
+    hout.close()
+
+    hout = open(output_prefix + ".seq.virus.sort.txt", 'w')
+    fRet = subprocess.call(["sort", "-k1,1", "-k2,2", "-k3,3", output_prefix + ".seq.virus.txt"], stdout = hout)
+    hout.close()
+
+    utils.count_virus_mapped_bases(output_prefix + ".seq.virus.sort.txt", output_prefix + ".virus.base.txt")
 
