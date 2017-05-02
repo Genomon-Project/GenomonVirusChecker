@@ -13,11 +13,11 @@ with gzip.open("viral.1.1.genomic.fna.gz", 'r') as hin:
         line = line.rstrip('\n')
         if line.startswith('>'):
             F = line.split('|')
-            print >> hout1, '>' + F[3]
+            print >> hout1, '>' + F[1]
             if tempVirus != "":
                 print >> hout2, tempVirus + '\t' + str(tempLength) + '\t' + tempDescription
-            tempVirus = F[3]
-            tempDescription = F[4].strip(' ')
+            tempVirus = F[1]
+            tempDescription = F[2].strip(' ')
             tempLength = 0
         else:
             tempLength = tempLength + len(line)
